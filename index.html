@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>To‑Do</title>
+	<link rel="stylesheet" href="CSS/main.css">
+</head>
+<body>
+	<main class="container">
+		<header class="topbar">
+			<div class="progress">
+				<svg id="progress-svg" width="72" height="72" viewBox="0 0 36 36" aria-label="Progress">
+					<circle class="bg" cx="18" cy="18" r="16"></circle>
+					<circle class="fg" cx="18" cy="18" r="16"></circle>
+					<text x="18" y="20" text-anchor="middle" class="pct">0%</text>
+				</svg>
+			</div>
+			<div class="filters">
+				<button class="filter active" data-filter="all">All</button>
+				<button class="filter" data-filter="work">💼 Work</button>
+				<button class="filter" data-filter="personal">📚 Personal</button>
+				<button class="filter" data-filter="urgent">⚡ Urgent</button>
+			</div>
+			<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+		</header>
+
+    		<div class="controls">
+			<input id="todo-input" type="text" placeholder="Add a task">
+			<input id="todo-date" type="date" aria-label="Due date">
+			<select id="todo-cat" aria-label="Category">
+				<option value="work">Work</option>
+				<option value="personal">Personal</option>
+				<option value="urgent">Urgent</option>
+			</select>
+			<button id="add-btn" type="button">Add</button>
+		</div>
+
+		<ul id="todo-list"></ul>
+
+		<div id="empty" class="empty" hidden>
+			<div id="quote" class="quote"></div>
+		</div>
+	</main>
+	<script src="JS/main.js"></script>
+</body>
+</html>
