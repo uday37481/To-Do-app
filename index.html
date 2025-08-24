@@ -24,10 +24,18 @@
 			</div>
 			<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
 		</header>
-
-
 		
-
+        <div class="controls">
+			<input id="todo-input" type="text" placeholder="Add a task">
+			<input id="todo-date" type="date" aria-label="Due date">
+			<select id="todo-cat" aria-label="Category">
+				<option value="work">Work</option>
+				<option value="personal">Personal</option>
+				<option value="urgent">Urgent</option>
+			</select>
+			<button id="add-btn" type="button">Add</button>
+		</div>
+		
 		<ul id="todo-list"></ul>
 
 		<div id="empty" class="empty" hidden>
