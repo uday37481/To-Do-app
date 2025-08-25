@@ -114,3 +114,34 @@ h1 {
 	transition: stroke-dashoffset 200ms ease;
 }
 .progress .pct { font-size: 8px; fill: #222; }
+
+.filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.filter {
+	padding: 6px 10px;
+	border: 1px solid #ccc;
+	background: #fafafa;
+	border-radius: 16px;
+	cursor: pointer;
+	font-size: 13px;
+}
+.filter.active { background: #e8f1ff; border-color: #bcd6ff; }
+
+.theme-toggle {
+	border: 1px solid #ccc;
+	background: #fafafa;
+	border-radius: 6px;
+	padding: 8px 10px;
+	cursor: pointer;
+	transition: background 200ms ease;
+}
+
+.item { transition: background 150ms ease, opacity 150ms ease; }
+.done .text { text-decoration: line-through; color: #777; opacity: 0.7; }
+.due-soon { border-color: #ffcf66; box-shadow: 0 0 0 2px #fff4d6 inset; }
+.actions { display: flex; gap: 6px; }
+
+.empty { text-align: center; padding: 24px 12px; color: #666; }
+.quote { font-style: italic; }
+
+/* Drag indicator */
+.dragging { opacity: 0.6; }
