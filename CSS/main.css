@@ -27,3 +27,90 @@ h1 {
 	font-size: 24px;
 	margin-bottom: 16px;
 }
+
+.controls {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+#todo-input {
+	flex: 1;
+	padding: 10px 12px;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+}
+
+#add-btn {
+	padding: 10px 14px;
+	border: 1px solid #ccc;
+	background: #f3f3f3;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+#todo-list {
+	list-style: none;
+	display: grid;
+	gap: 8px;
+}
+
+.item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 12px;
+	border: 1px solid #e5e5e5;
+	border-radius: 6px;
+}
+
+.text {
+	flex: 1;
+	margin-right: 12px;
+}
+
+.done .text {
+	text-decoration: line-through;
+	color: #777;
+}
+
+.actions {
+	display: flex;
+	gap: 6px;
+}
+
+.btn {
+	padding: 6px 10px;
+	border: 1px solid #ccc;
+	background: #fafafa;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+/* --- Added minimal styles for new features --- */
+.topbar {
+	display: grid;
+	grid-template-columns: 72px 1fr auto;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 12px;
+}
+
+.progress svg { display: block; }
+.progress .bg {
+	fill: none;
+	stroke: #eee;
+	stroke-width: 2.5;
+}
+.progress .fg {
+	fill: none;
+	stroke: #4a90e2;
+	stroke-width: 2.5;
+	stroke-linecap: round;
+	transform: rotate(-90deg);
+	transform-origin: 50% 50%;
+	stroke-dasharray: 100 100;
+	stroke-dashoffset: 100;
+	transition: stroke-dashoffset 200ms ease;
+}
+.progress .pct { font-size: 8px; fill: #222; }
