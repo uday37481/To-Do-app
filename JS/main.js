@@ -29,3 +29,11 @@ function setEmptyState() {
 		quoteBox.textContent = quotes[Math.floor(Math.random() * quotes.length)];
 	}
 }
+
+function computeProgress() {
+	const items = list.querySelectorAll('.item');
+	if (items.length === 0) {
+		progressCircle.style.strokeDashoffset = 100;
+		progressText.textContent = '0%';
+		return;
+	}
