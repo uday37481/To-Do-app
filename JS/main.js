@@ -21,3 +21,11 @@ const quotes = [
 ];
 
 let activeFilter = 'all';
+
+function setEmptyState() {
+	const hasItems = list.children.length > 0;
+	empty.hidden = hasItems;
+	if (!hasItems) {
+		quoteBox.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+	}
+}
