@@ -52,3 +52,14 @@ function isDueSoon(iso) {
 	const oneDay = 24 * 60 * 60 * 1000;
 	return diff > 0 && diff <= oneDay * 2; // within 2 days
 }
+
+function renderVisibilityByFilter() {
+	[...list.children].forEach(li => {
+		const cat = li.getAttribute('data-cat');
+		li.style.display = (activeFilter === 'all' || cat === activeFilter) ? '' : 'none';
+	});
+}
+
+function addItem() {
+	const value = (input.value || '').trim();
+	if (!value) return;
