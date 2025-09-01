@@ -146,4 +146,13 @@ h1 {
 /* Drag indicator */
 .dragging { opacity: 0.6; }
 
-
+/* Dark mode */
+body.dark { background: #121212; color: #e5e5e5; }
+body.dark .container { background: #1d1d1d; border-color: #333; }
+body.dark .progress .bg { stroke: #2c2c2c; }
+body.dark .progress .pct { fill: #e5e5e5; }
+body.dark .filter, body.dark #add-btn, body.dark .btn, body.dark .theme-toggle, body.dark #todo-input, body.dark #todo-date, body.dark #todo-cat {
+	background: #2a2a2a; border-color: #3a3a3a; color: #e5e5e5;
+}
+body.dark .item { background: #222; border-color: #333; }
+body.dark .filter.active { background: #1f2b3a; border-color: #325b8a; }
