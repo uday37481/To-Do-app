@@ -63,3 +63,15 @@ function renderVisibilityByFilter() {
 function addItem() {
 	const value = (input.value || '').trim();
 	if (!value) return;
+
+	const li = document.createElement('li');
+	li.className = 'item';
+	li.draggable = true;
+	li.setAttribute('data-cat', catSelect.value);
+
+	const text = document.createElement('span');
+	text.className = 'text';
+	text.textContent = value + (dateInput.value ? ' • ' + dateInput.value : '');
+
+	const actions = document.createElement('div');
+	actions.className = 'actions';
