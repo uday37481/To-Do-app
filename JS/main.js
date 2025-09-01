@@ -37,3 +37,18 @@ function computeProgress() {
 		progressText.textContent = '0%';
 		return;
 	}
+
+const done = list.querySelectorAll('.item.done').length;
+	const pct = Math.round((done / items.length) * 100);
+	progressCircle.style.strokeDashoffset = 100 - pct;
+	progressText.textContent = pct + '%';
+}
+
+function isDueSoon(iso) {
+	if (!iso) return false;
+	const now = new Date();
+	const due = new Date(iso + 'T23:59:59');
+	const diff = due - now;
+	const oneDay = 24 * 60 * 60 * 1000;
+	return diff > 0 && diff <= oneDay * 2; // within 2 days
+}
