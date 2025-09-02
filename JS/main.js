@@ -104,3 +104,28 @@ addBtn.addEventListener('click', addItem);
 input.addEventListener('keydown', function (e) { 
 	if (e.key === 'Enter') addItem(); 
 });
+
+list.addEventListener('click', function (e) {
+	const target = e.target;
+	if (target.tagName === 'BUTTON') {
+		const item = target.closest('.item');
+		if (!item) return;
+		if (target.textContent === 'Delete') {
+			item.remove();
+			computeProgress();
+			setEmptyState();
+		} else if (target.textContent === 'Done') {
+			item.classList.toggle('done');
+			target.textContent = item.classList.contains('done') ? 'Undo' : 'Done';
+			computeProgress();
+		}
+	}
+});
+
+// Filters
+filters.forEach(btn => btn.addEventListener('click', () => {
+	filters.forEach(b => b.classList.remove('active'));
+	btn.classList.add('active');
+	activeFilter = btn.getAttribute('data-filter');
+	renderVisibilityByFilter();
+}));
