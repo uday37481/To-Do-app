@@ -75,3 +75,17 @@ function addItem() {
 
 	const actions = document.createElement('div');
 	actions.className = 'actions';
+
+const toggleBtn = document.createElement('button');
+	toggleBtn.className = 'btn';
+	toggleBtn.textContent = 'Done';
+
+	const delBtn = document.createElement('button');
+	delBtn.className = 'btn';
+	delBtn.textContent = 'Delete';
+
+	actions.appendChild(toggleBtn);
+	actions.appendChild(delBtn);
+
+	li.appendChild(text);
+	li.appendChild(actions);
