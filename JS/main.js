@@ -89,3 +89,18 @@ const toggleBtn = document.createElement('button');
 
 	li.appendChild(text);
 	li.appendChild(actions);
+
+		if (isDueSoon(dateInput.value)) li.classList.add('due-soon');
+
+	list.appendChild(li);
+	input.value = '';
+	dateInput.value = '';
+	computeProgress();
+	setEmptyState();
+	renderVisibilityByFilter();
+}
+
+addBtn.addEventListener('click', addItem);
+input.addEventListener('keydown', function (e) { 
+	if (e.key === 'Enter') addItem(); 
+});
