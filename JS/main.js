@@ -129,3 +129,20 @@ filters.forEach(btn => btn.addEventListener('click', () => {
 	activeFilter = btn.getAttribute('data-filter');
 	renderVisibilityByFilter();
 }));
+
+// Theme toggle
+themeToggle.addEventListener('click', () => {
+	document.body.classList.toggle('dark');
+	const dark = document.body.classList.contains('dark');
+	themeToggle.textContent = dark ? '☀️' : '🌙';
+});
+
+// Drag and drop reordering
+let dragEl = null;
+
+list.addEventListener('dragstart', (e) => {
+	const li = e.target.closest('.item');
+	if (!li) return;
+	dragEl = li;
+	li.classList.add('dragging');
+});
