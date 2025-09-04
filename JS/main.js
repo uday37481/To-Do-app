@@ -146,3 +146,19 @@ list.addEventListener('dragstart', (e) => {
 	dragEl = li;
 	li.classList.add('dragging');
 });
+
+list.addEventListener('dragend', () => {
+	if (dragEl) dragEl.classList.remove('dragging');
+	dragEl = null;
+});
+
+list.addEventListener('dragover', (e) => {
+	e.preventDefault();
+	const after = getDragAfterElement(list, e.clientY);
+	if (!dragEl) return;
+	if (after == null) {
+		list.appendChild(dragEl);
+	} else {
+		list.insertBefore(dragEl, after);
+	}
+});
