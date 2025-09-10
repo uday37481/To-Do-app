@@ -5,3 +5,8 @@
   --primary: #1976d2;
   --background: #e3f2fd;
 }
+
+.theme-green {
+  --primary: #388e3c;
+  --background: #e8f5e9;
+}
