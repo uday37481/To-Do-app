@@ -1,0 +1,7 @@
+/* Feature : Customizable Themes */
+/* Defined additional color themes here */
+
+.theme-blue {
+  --primary: #1976d2;
+  --background: #e3f2fd;
+}
