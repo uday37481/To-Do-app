@@ -96,6 +96,13 @@ h1 {
 	margin-bottom: 12px;
 }
 
+
+.header-controls {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+}
+
 .progress svg { display: block; }
 .progress .bg {
 	fill: none;
@@ -126,13 +133,25 @@ h1 {
 }
 .filter.active { background: #e8f1ff; border-color: #bcd6ff; }
 
-.theme-toggle {
+.theme-toggle, .voice-btn, .pomodoro-btn, .analytics-btn {
 	border: 1px solid #ccc;
 	background: #fafafa;
 	border-radius: 6px;
 	padding: 8px 10px;
 	cursor: pointer;
 	transition: background 200ms ease;
+	font-size: 14px;
+}
+
+.voice-btn:hover, .pomodoro-btn:hover, .analytics-btn:hover {
+	background: #e8f1ff;
+	border-color: #bcd6ff;
+}
+
+.voice-btn.active {
+	background: #ff6b6b;
+	color: white;
+	border-color: #ff5252;
 }
 
 .item { transition: background 150ms ease, opacity 150ms ease; }
