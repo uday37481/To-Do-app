@@ -21,11 +21,37 @@
 				<button class="filter" data-filter="work">💼 Work</button>
 				<button class="filter" data-filter="personal">📚 Personal</button>
 				<button class="filter" data-filter="urgent">⚡ Urgent</button>
+				<button class="filter" data-filter="habits">🔄 Habits</button>
 			</div>
+			<div class="header-controls">
+				<button id="voice-input-btn" class="voice-btn" aria-label="Voice input">🎤</button>
+				<button id="pomodoro-btn" class="pomodoro-btn" aria-label="Start Pomodoro">🍅</button>
+				<button id="analytics-btn" class="analytics-btn" aria-label="View Analytics">📊</button>
 			<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+			</div>
 		</header>
 		
         <div class="controls">
+			<div id="empty" class="empty" hidden>
+			<div id="quote" class="quote"></div>
+		</div>
+
+        <!-- Pomodoro Timer Panel -->
+		<div id="pomodoro-panel" class="pomodoro-panel" hidden>
+			<div class="pomodoro-display">
+				<div id="pomodoro-timer" class="timer-display">25:00</div>
+				<div class="pomodoro-controls">
+					<button id="pomodoro-start" class="btn">Start</button>
+					<button id="pomodoro-pause" class="btn">Pause</button>
+					<button id="pomodoro-reset" class="btn">Reset</button>
+				</div>
+				<div class="pomodoro-session-info">
+					<span id="session-count">Session: 1</span>
+					<span id="break-time">Break: 5 min</span>
+				</div>
+			</div>
+		</div>
+			
 			<input id="todo-input" type="text" placeholder="Add a task">
 			<input id="todo-date" type="date" aria-label="Due date">
 			<select id="todo-cat" aria-label="Category">
