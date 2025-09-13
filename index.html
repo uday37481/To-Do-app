@@ -51,6 +51,37 @@
 				</div>
 			</div>
 		</div>
+
+					<!-- Analytics Panel -->
+		<div id="analytics-panel" class="analytics-panel" hidden>
+			<div class="analytics-header">
+				<h3>📊 Productivity Analytics</h3>
+				<button id="close-analytics" class="close-btn">×</button>
+			</div>
+			<div class="analytics-content">
+				<div class="stats-grid">
+					<div class="stat-card">
+						<div class="stat-number" id="completed-today">0</div>
+						<div class="stat-label">Completed Today</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-number" id="streak-days">0</div>
+						<div class="stat-label">Day Streak</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-number" id="weekly-goal">0%</div>
+						<div class="stat-label">Weekly Goal</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-number" id="focus-time">0h</div>
+						<div class="stat-label">Focus Time</div>
+					</div>
+				</div>
+				<div class="chart-container">
+					<canvas id="productivity-chart" width="400" height="200"></canvas>
+				</div>
+			</div>
+		</div>
 			
 			<input id="todo-input" type="text" placeholder="Add a task">
 			<input id="todo-date" type="date" aria-label="Due date">
