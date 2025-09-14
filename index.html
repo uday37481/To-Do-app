@@ -81,6 +81,25 @@
 					<canvas id="productivity-chart" width="400" height="200"></canvas>
 				</div>
 			</div>
+			<!-- Voice Input Status -->
+		<div id="voice-status" class="voice-status" hidden>
+			<div class="voice-indicator">
+				<span class="voice-text">🎤 Listening...</span>
+				<button id="stop-voice" class="btn">Stop</button>
+			</div>
+		</div>
+
+		<!-- Habit Tracker Panel -->
+		<div id="habit-tracker" class="habit-tracker" hidden>
+			<div class="habit-header">
+				<h3>🔄 Habit Tracker</h3>
+				<button id="close-habits" class="close-btn">×</button>
+			</div>
+			<div class="habit-list" id="habit-list">
+				<!-- Habits will be dynamically added here -->
+			</div>
+			<button id="add-habit" class="btn">+ Add Habit</button>
+		</div>
 		</div>
 			
 			<input id="todo-input" type="text" placeholder="Add a task">
