@@ -27,16 +27,28 @@
 				<button id="voice-input-btn" class="voice-btn" aria-label="Voice input">🎤</button>
 				<button id="pomodoro-btn" class="pomodoro-btn" aria-label="Start Pomodoro">🍅</button>
 				<button id="analytics-btn" class="analytics-btn" aria-label="View Analytics">📊</button>
-			<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+				<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
 			</div>
 		</header>
 		
         <div class="controls">
-			<div id="empty" class="empty" hidden>
+			<input id="todo-input" type="text" placeholder="Add a task">
+			<input id="todo-date" type="date" aria-label="Due date">
+			<select id="todo-cat" aria-label="Category">
+				<option value="work">Work</option>
+				<option value="personal">Personal</option>
+				<option value="urgent">Urgent</option>
+			</select>
+			<button id="add-btn" type="button">Add</button>
+		</div>
+		
+		<ul id="todo-list"></ul>
+
+		<div id="empty" class="empty" hidden>
 			<div id="quote" class="quote"></div>
 		</div>
 
-        <!-- Pomodoro Timer Panel -->
+		<!-- Pomodoro Timer Panel -->
 		<div id="pomodoro-panel" class="pomodoro-panel" hidden>
 			<div class="pomodoro-display">
 				<div id="pomodoro-timer" class="timer-display">25:00</div>
@@ -52,7 +64,7 @@
 			</div>
 		</div>
 
-					<!-- Analytics Panel -->
+		<!-- Analytics Panel -->
 		<div id="analytics-panel" class="analytics-panel" hidden>
 			<div class="analytics-header">
 				<h3>📊 Productivity Analytics</h3>
@@ -81,7 +93,9 @@
 					<canvas id="productivity-chart" width="400" height="200"></canvas>
 				</div>
 			</div>
-			<!-- Voice Input Status -->
+		</div>
+
+		<!-- Voice Input Status -->
 		<div id="voice-status" class="voice-status" hidden>
 			<div class="voice-indicator">
 				<span class="voice-text">🎤 Listening...</span>
@@ -100,7 +114,7 @@
 			</div>
 			<button id="add-habit" class="btn">+ Add Habit</button>
 		</div>
-			</main>
+	</main>
 	
 	<script src="JS/main.js"></script>
 	<script src="JS/analytics.js"></script>
