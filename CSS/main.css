@@ -270,6 +270,37 @@ h1 {
 	letter-spacing: 0.5px;
 }
 
+.chart-container {
+	background: white;
+	border: 1px solid #e5e5e5;
+	border-radius: 6px;
+	padding: 16px;
+	text-align: center;
+}
+
+/* Voice Input Status */
+.voice-status {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	background: #ff6b6b;
+	color: white;
+	padding: 12px 16px;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+	z-index: 1000;
+}
+
+.voice-indicator {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.voice-text {
+	font-weight: 500;
+}
+
 /* Dark mode */
 body.dark { background: #121212; color: #e5e5e5; }
 body.dark .container { background: #1d1d1d; border-color: #333; }
