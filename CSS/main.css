@@ -301,6 +301,33 @@ h1 {
 	font-weight: 500;
 }
 
+/* Habit Tracker Panel */
+.habit-tracker {
+	background: #f8f9fa;
+	border: 1px solid #e5e5e5;
+	border-radius: 8px;
+	padding: 20px;
+	margin: 16px 0;
+}
+
+.habit-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.habit-header h3 {
+	margin: 0;
+	font-size: 18px;
+}
+
+.habit-list {
+	display: grid;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+
 /* Dark mode */
 body.dark { background: #121212; color: #e5e5e5; }
 body.dark .container { background: #1d1d1d; border-color: #333; }
