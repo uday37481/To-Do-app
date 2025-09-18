@@ -1,10 +1,23 @@
-// Feature: Voice Input
-// Add tasks using voice commands
+// Feature: Voice Input (UMD-style globals)
 
-export function initVoiceInput() {
-  // Initialize speech recognition
-}
+window.VoiceInput = (function () {
+	let recognizing = false;
 
-export function listenForTask() {
-  // Start listening for a new task
-}
+	function init() {
+		// Placeholder: no-op unless Web Speech API is available
+	}
+
+	function start() {
+		recognizing = true;
+		const status = document.getElementById('voice-status');
+		if (status) status.hidden = false;
+	}
+
+	function stop() {
+		recognizing = false;
+		const status = document.getElementById('voice-status');
+		if (status) status.hidden = true;
+	}
+
+	return { init, start, stop };
+})();
