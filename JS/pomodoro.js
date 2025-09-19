@@ -30,3 +30,19 @@ window.Pomodoro = (function () {
 			}
 		}, 1000);
 	}
+	
+    function pause() {
+		if (intervalId) {
+			clearInterval(intervalId);
+			intervalId = null;
+		}
+	}
+
+	function reset(durationMinutes = 25) {
+		pause();
+		remainingSeconds = Math.max(1, Math.floor(durationMinutes * 60));
+		updateDisplay();
+	}
+
+	return { start, pause, reset };
+})();
