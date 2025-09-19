@@ -1,10 +1,32 @@
-// Feature 4: Pomodoro Timer
-// Timer for focused work sessions
+// Feature: Pomodoro Timer (UMD-style globals)
 
-export function startPomodoro(durationMinutes = 25) {
-  // Start a pomodoro timer
-}
+window.Pomodoro = (function () {
+	let intervalId = null;
+	let remainingSeconds = 0;
 
-export function stopPomodoro() {
-  // Stop the timer
-}
+	function formatTime(totalSeconds) {
+		const m = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+		const s = Math.floor(totalSeconds % 60).toString().padStart(2, '0');
+		return m + ':' + s;
+	}
+
+	function updateDisplay() {
+		const el = document.getElementById('pomodoro-timer');
+		if (el) el.textContent = formatTime(remainingSeconds);
+	}
+
+	function start(durationMinutes = 25) {
+		if (intervalId) clearInterval(intervalId);
+		remainingSeconds = Math.max(1, Math.floor(durationMinutes * 60));
+		updateDisplay();
+		intervalId = setInterval(() => {
+			remainingSeconds -= 1;
+			updateDisplay();
+			if (remainingSeconds <= 0) {
+				clearInterval(intervalId);
+				intervalId = null;
+				const panel = document.getElementById('pomodoro-panel');
+				if (panel) panel.classList.add('complete');
+			}
+		}, 1000);
+	}
