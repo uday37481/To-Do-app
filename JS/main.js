@@ -185,3 +185,55 @@ filters.forEach(btn => btn.addEventListener('click', () => {
 	activeFilter = btn.getAttribute('data-filter');
 	renderVisibilityByFilter();
 }));
+
+// Theme toggle
+themeToggle.addEventListener('click', () => {
+	document.body.classList.toggle('dark');
+	const dark = document.body.classList.contains('dark');
+	themeToggle.textContent = dark ? '☀️' : '🌙';
+});
+
+// Drag and drop reordering
+let dragEl = null;
+
+list.addEventListener('dragstart', (e) => {
+	const li = e.target.closest('.item');
+	if (!li) return;
+	dragEl = li;
+	li.classList.add('dragging');
+});
+
+list.addEventListener('dragend', () => {
+	if (dragEl) dragEl.classList.remove('dragging');
+	dragEl = null;
+});
+
+list.addEventListener('dragover', (e) => {
+	e.preventDefault();
+	const after = getDragAfterElement(list, e.clientY);
+	if (!dragEl) return;
+	if (after == null) {
+		list.appendChild(dragEl);
+	} else {
+		list.insertBefore(dragEl, after);
+	}
+});
+
+function getDragAfterElement(container, y) {
+	const els = [...container.querySelectorAll('.item:not(.dragging)')];
+	return els.reduce((closest, child) => {
+		const box = child.getBoundingClientRect();
+		const offset = y - box.top - box.height / 2;
+		if (offset < 0 && offset > closest.offset) {
+			return { offset, element: child };
+		} else {
+			return closest;
+		}
+	}, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+// Initial paint
+computeProgress();
+setEmptyState();
+document.dispatchEvent(new Event('task-updated'));
+
