@@ -60,66 +60,122 @@ function renderVisibilityByFilter() {
 	});
 }
 
+// --- Voice Assistant Integration & Optimization ---
+
+// Helper: Add item programmatically (for voice input)
+function addItemFromVoice(text, date = '', cat = 'work') {
+    const value = (text || '').trim();
+    if (!value) return;
+
+    const li = document.createElement('li');
+    li.className = 'item';
+    li.draggable = true;
+    li.setAttribute('data-cat', cat);
+
+    const span = document.createElement('span');
+    span.className = 'text';
+    span.textContent = value + (date ? ' • ' + date : '');
+
+    const actions = document.createElement('div');
+    actions.className = 'actions';
+
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'btn';
+    toggleBtn.textContent = 'Done';
+
+    const delBtn = document.createElement('button');
+    delBtn.className = 'btn';
+    delBtn.textContent = 'Delete';
+
+    actions.appendChild(toggleBtn);
+    actions.appendChild(delBtn);
+
+    li.appendChild(span);
+    li.appendChild(actions);
+
+    if (isDueSoon(date)) li.classList.add('due-soon');
+
+    list.appendChild(li);
+    computeProgress();
+    setEmptyState();
+    renderVisibilityByFilter();
+    document.dispatchEvent(new Event('task-updated'));
+}
+
+// Expose for voice-input.js
+window.addItemFromVoice = addItemFromVoice;
+
+// --- Voice Assistant: Listen for voice input events ---
+document.addEventListener('voice-add-task', function (e) {
+    // e.detail: { text, date, cat }
+    const { text, date, cat } = e.detail || {};
+    addItemFromVoice(text, date, cat);
+});
+
+// --- Optimize addItem to always trigger analytics ---
 function addItem() {
-	const value = (input.value || '').trim();
-	if (!value) return;
+    const value = (input.value || '').trim();
+    if (!value) return;
 
-	const li = document.createElement('li');
-	li.className = 'item';
-	li.draggable = true;
-	li.setAttribute('data-cat', catSelect.value);
+    const li = document.createElement('li');
+    li.className = 'item';
+    li.draggable = true;
+    li.setAttribute('data-cat', catSelect.value);
 
-	const text = document.createElement('span');
-	text.className = 'text';
-	text.textContent = value + (dateInput.value ? ' • ' + dateInput.value : '');
+    const text = document.createElement('span');
+    text.className = 'text';
+    text.textContent = value + (dateInput.value ? ' • ' + dateInput.value : '');
 
-	const actions = document.createElement('div');
-	actions.className = 'actions';
+    const actions = document.createElement('div');
+    actions.className = 'actions';
 
-const toggleBtn = document.createElement('button');
-	toggleBtn.className = 'btn';
-	toggleBtn.textContent = 'Done';
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'btn';
+    toggleBtn.textContent = 'Done';
 
-	const delBtn = document.createElement('button');
-	delBtn.className = 'btn';
-	delBtn.textContent = 'Delete';
+    const delBtn = document.createElement('button');
+    delBtn.className = 'btn';
+    delBtn.textContent = 'Delete';
 
-	actions.appendChild(toggleBtn);
-	actions.appendChild(delBtn);
+    actions.appendChild(toggleBtn);
+    actions.appendChild(delBtn);
 
-	li.appendChild(text);
-	li.appendChild(actions);
+    li.appendChild(text);
+    li.appendChild(actions);
 
-		if (isDueSoon(dateInput.value)) li.classList.add('due-soon');
+    if (isDueSoon(dateInput.value)) li.classList.add('due-soon');
 
-	list.appendChild(li);
-	input.value = '';
-	dateInput.value = '';
-	computeProgress();
-	setEmptyState();
-	renderVisibilityByFilter();
+    list.appendChild(li);
+    input.value = '';
+    dateInput.value = '';
+    computeProgress();
+    setEmptyState();
+    renderVisibilityByFilter();
+    document.dispatchEvent(new Event('task-updated'));
 }
 
 addBtn.addEventListener('click', addItem);
 input.addEventListener('keydown', function (e) { 
-	if (e.key === 'Enter') addItem(); 
+    if (e.key === 'Enter') addItem(); 
 });
 
 list.addEventListener('click', function (e) {
-	const target = e.target;
-	if (target.tagName === 'BUTTON') {
-		const item = target.closest('.item');
-		if (!item) return;
-		if (target.textContent === 'Delete') {
-			item.remove();
-			computeProgress();
-			setEmptyState();
-		} else if (target.textContent === 'Done') {
-			item.classList.toggle('done');
-			target.textContent = item.classList.contains('done') ? 'Undo' : 'Done';
-			computeProgress();
-		}
-	}
+    const target = e.target;
+    if (target.tagName === 'BUTTON') {
+        const item = target.closest('.item');
+        if (!item) return;
+        if (target.textContent === 'Delete') {
+            item.remove();
+            computeProgress();
+            setEmptyState();
+            document.dispatchEvent(new Event('task-updated'));
+        } else if (target.textContent === 'Done') {
+            item.classList.toggle('done');
+            target.textContent = item.classList.contains('done') ? 'Undo' : 'Done';
+            computeProgress();
+            document.dispatchEvent(new Event('task-updated'));
+        }
+    }
 });
 
 // Filters
@@ -129,53 +185,3 @@ filters.forEach(btn => btn.addEventListener('click', () => {
 	activeFilter = btn.getAttribute('data-filter');
 	renderVisibilityByFilter();
 }));
-
-// Theme toggle
-themeToggle.addEventListener('click', () => {
-	document.body.classList.toggle('dark');
-	const dark = document.body.classList.contains('dark');
-	themeToggle.textContent = dark ? '☀️' : '🌙';
-});
-
-// Drag and drop reordering
-let dragEl = null;
-
-list.addEventListener('dragstart', (e) => {
-	const li = e.target.closest('.item');
-	if (!li) return;
-	dragEl = li;
-	li.classList.add('dragging');
-});
-
-list.addEventListener('dragend', () => {
-	if (dragEl) dragEl.classList.remove('dragging');
-	dragEl = null;
-});
-
-list.addEventListener('dragover', (e) => {
-	e.preventDefault();
-	const after = getDragAfterElement(list, e.clientY);
-	if (!dragEl) return;
-	if (after == null) {
-		list.appendChild(dragEl);
-	} else {
-		list.insertBefore(dragEl, after);
-	}
-});
-
-function getDragAfterElement(container, y) {
-	const els = [...container.querySelectorAll('.item:not(.dragging)')];
-	return els.reduce((closest, child) => {
-		const box = child.getBoundingClientRect();
-		const offset = y - box.top - box.height / 2;
-		if (offset < 0 && offset > closest.offset) {
-			return { offset, element: child };
-		} else {
-			return closest;
-		}
-	}, { offset: Number.NEGATIVE_INFINITY }).element;
-}
-
-// Initial paint
-computeProgress();
-setEmptyState();
